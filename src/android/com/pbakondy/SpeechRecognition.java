@@ -247,6 +247,12 @@ public class SpeechRecognition extends CordovaPlugin {
       if (resultCode == Activity.RESULT_OK) {
         try {
           ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+          //appending score after matched string
+          float[] scores = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
+          for(int i=0; i< scores.length;i++){
+            matches.set(i, matches.get(i) + "|" + scores[i]);
+          }
+          
           JSONArray jsonMatches = new JSONArray(matches);
           this.callbackContext.success(jsonMatches);
         } catch (Exception e) {
