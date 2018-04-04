@@ -324,7 +324,7 @@ public class SpeechRecognition extends CordovaPlugin {
       webView.loadUrl("javascript:console.log('SCORES:"+scores+"');");
       
       try {
-        JSONArray jsonMatches = new JSONArray(matches);
+        JSONArray jsonMatches = new JSONArray(scores);
         callbackContext.success(jsonMatches);
       } catch (Exception e) {
         e.printStackTrace();
