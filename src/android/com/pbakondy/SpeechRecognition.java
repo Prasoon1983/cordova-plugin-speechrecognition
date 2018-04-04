@@ -317,6 +317,12 @@ public class SpeechRecognition extends CordovaPlugin {
     public void onResults(Bundle results) {
       ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
       Log.d(LOG_TAG, "SpeechRecognitionListener results: " + matches);
+      webView.loadUrl("javascript:console.log('RESULTS:"+matches+"');");
+
+      ArrayList<String> scores = results.getStringArrayList(SpeechRecognizer.CONFIDENCE_SCORES);
+      Log.d(LOG_TAG, "SpeechRecognitionListener scores: " + scores);
+      webView.loadUrl("javascript:console.log('SCORES:"+scores+"');");
+      
       try {
         JSONArray jsonMatches = new JSONArray(matches);
         callbackContext.success(jsonMatches);
